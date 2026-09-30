@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أكاديمية النور للتعلم عن بعد | التسارع المركزي والقوة المركزية</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+:root{
+  --gold:#d4af37;
+  --gold-light:#f1d375;
+  --gold-dark:#9c7a1e;
+  --navy-1:#050b1a;
+  --navy-2:#0b1530;
+  --navy-3:#101c3d;
+  --navy-4:#152449;
+  --text-light:#f4f2ea;
+  --text-dim:#c9cee0;
+  --danger:#e74c3c;
+  --success:#2ecc71;
+  --card-border:rgba(212,175,55,.35);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:"Tahoma","Segoe UI",Arial,sans-serif;
+  background:
+    radial-gradient(circle at 15% 10%, #0e1c3e 0%, transparent 45%),
+    radial-gradient(circle at 85% 90%, #0e1c3e 0%, transparent 45%),
+    linear-gradient(160deg,var(--navy-1),var(--navy-2) 45%,var(--navy-3) 100%);
+  color:var(--text-light);
+  min-height:100vh;
+  position:relative;
+  overflow-x:hidden;
+}
+/* Watermark layer */
+.watermark-layer{
+  position:fixed;inset:0;pointer-events:none;user-select:none;-webkit-user-select:none;z-index:9999;
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  transform:rotate(-28deg) scale(1.5);
+  opacity:.06;
+}
+.watermark-layer span{
+  font-size:24px;font-weight:700;color:var(--gold-light);
+  margin:64px 90px;white-space:nowrap;letter-spacing:1px;
+}
+.page-wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:18px 16px 60px;}
+
+/* Header */
+header.site-header{
+  text-align:center;padding:22px 10px 18px;
+  border-bottom:3px solid var(--gold);
+  margin-bottom:18px;
+}
+.brand-row{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
+.brand-badge{
+  width:64px;height:64px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,var(--gold-light),var(--gold-dark));
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;color:#1a1300;font-size:26px;
+  box-shadow:0 0 18px rgba(212,175,55,.55), inset 0 0 8px rgba(0,0,0,.35);
+  border:2px solid #fff4d1;
+}
+h1.main-title{
+  font-size:clamp(22px,4vw,34px);
+  font-weight:900;
+  color:var(--gold);
+  text-shadow:0 0 10px rgba(212,175,55,.45), 1px 1px 0 #000;
+  margin:0;
+  letter-spacing:.5px;
+}
+.sub-en{
+  color:var(--gold-light);
+  font-weight:700;
+  letter-spacing:2px;
+  font-size:15px;
+  margin-top:2px;
+}
+.header-meta{
+  color:var(--text-dim);font-size:14px;margin-top:8px;
+}
+.header-meta b{color:var(--gold-light);}
+.lecture-title{
+  margin-top:14px;font-size:clamp(16px,2.6vw,22px);
+  color:var(--text-light);font-weight:800;
+  background:linear-gradient(90deg,transparent,rgba(212,175,55,.15),transparent);
+  padding:8px 6px;border-radius:8px;
+}
+.lecture-title .grade-badge{
+  display:inline-block;background:var(--gold);color:#151000;
+  padding:3px 12px;border-radius:20px;font-size:13px;font-weight:800;margin-inline-start:8px;
+}
+
+/* Nav */
+nav.tabs{
+  display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
+  margin:20px 0 26px;
+}
+nav.tabs button{
+  background:var(--navy-4);
+  border:2px solid var(--card-border);
+  color:var(--text-light);
+  padding:12px 22px;
+  border-radius:12px;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+  transition:.2s;
+  font-family:inherit;
+}
+nav.tabs button:hover{border-color:var(--gold);transform:translateY(-2px);}
+nav.tabs button.active{
+  background:linear-gradient(180deg,var(--gold-light),var(--gold-dark));
+  color:#151000;
+  border-color:var(--gold);
+  box-shadow:0 4px 14px rgba(212,175,55,.4);
+}
+nav.tabs button.teacher-btn{border-color:#7d8bc7;}
+
+section.view{display:none;animation:fadeIn .35s ease;}
+section.view.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+.card{
+  background:linear-gradient(160deg,rgba(21,36,73,.9),rgba(11,21,48,.92));
+  border:1px solid var(--card-border);
+  border-radius:16px;
+  padding:22px 22px;
+  margin-bottom:20px;
+  box-shadow:0 6px 22px rgba(0,0,0,.35);
+}
+h2.section-title{
+  color:var(--gold);
+  font-weight:900;
+  font-size:clamp(20px,3vw,26px);
+  border-bottom:4px solid var(--gold);
+  display:inline-block;
+  padding-bottom:6px;
+  margin:0 0 18px 0;
+  text-shadow:0 0 8px rgba(212,175,55,.3);
+}
+h3.part-title{
+  color:#151000;
+  background:linear-gradient(90deg,var(--gold-light),var(--gold-dark));
+  display:inline-block;
+  padding:6px 18px;
+  border-radius:20px;
+  font-size:17px;
+  font-weight:900;
+  margin:22px 0 12px;
+}
+h4.point-title{
+  color:var(--gold-light);
+  font-size:17px;font-weight:800;
+  margin:16px 0 6px;
+  border-right:4px solid var(--gold);
+  padding-right:10px;
+}
+p, li{color:var(--text-light);line-height:1.9;font-size:15.5px;}
+ul.pointy{padding-inline-start:22px;}
+ul.pointy li{margin-bottom:6px;}
+.formula-box{
+  background:rgba(0,0,0,.35);
+  border:1.5px solid var(--gold);
+  border-radius:10px;
+  padding:14px 18px;
+  margin:12px 0;
+  text-align:center;
+  font-size:20px;
+  font-weight:800;
+  color:var(--gold-light);
+  letter-spacing:1px;
+  direction:ltr;
+}
+.formula-box small{
+  display:block;color:var(--text-dim);font-size:13px;margin-top:6px;direction:rtl;font-weight:600;
+}
+table.compare{
+  width:100%;border-collapse:collapse;margin:14px 0;
+  font-size:14.5px;
+}
+table.compare th{
+  background:var(--gold-dark);color:#151000;padding:10px;border:1px solid var(--gold);
+}
+table.compare td{
+  padding:10px;border:1px solid var(--card-border);color:var(--text-light);
+  background:rgba(255,255,255,.03);
+  vertical-align:top;
+}
+.note-box{
+  background:rgba(212,175,55,.08);
+  border-right:4px solid var(--gold);
+  padding:10px 14px;border-radius:8px;margin:10px 0;color:var(--text-dim);
+  font-size:14px;
+}
+.badge-part{
+  display:inline-block;background:var(--navy-4);color:var(--gold-light);
+  border:1px solid var(--gold);padding:2px 10px;border-radius:14px;font-size:12px;font-weight:700;margin-inline-start:6px;
+}
+.example-box{
+  background:rgba(46,204,113,.06);
+  border:1px solid rgba(46,204,113,.4);
+  border-radius:10px;padding:14px 16px;margin:14px 0;
+}
+.example-box h5{color:#7be3a3;margin:0 0 8px;font-size:15.5px;}
+.solution-toggle{
+  margin-top:10px;background:transparent;border:1.5px dashed var(--gold);
+  color:var(--gold-light);padding:6px 14px;border-radius:8px;cursor:pointer;font-weight:700;font-size:13px;
+}
+.solution-body{display:none;margin-top:10px;padding-top:10px;border-top:1px dashed rgba(212,175,55,.3);}
+.solution-body.show{display:block;}
+.answer-only{
+  display:inline-block;margin-top:8px;background:rgba(212,175,55,.15);
+  border:1px solid var(--gold);padding:4px 12px;border-radius:8px;color:var(--gold-light);font-weight:800;font-size:14px;
+}
+.qbox{
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--card-border);
+  border-radius:10px;padding:14px 16px;margin-bottom:14px;
+}
+.qbox .qnum{color:var(--gold);font-weight:900;}
+
+/* Quiz */
+.quiz-gate{max-width:520px;margin:0 auto;text-align:center;}
+.quiz-gate input{
+  width:100%;padding:12px 14px;margin:8px 0;border-radius:10px;
+  border:1.5px solid var(--card-border);background:rgba(255,255,255,.05);color:var(--text-light);font-size:15px;
+}
+.quiz-gate input:focus{outline:none;border-color:var(--gold);}
+.btn-gold{
+  background:linear-gradient(180deg,var(--gold-light),var(--gold-dark));
+  color:#151000;border:none;padding:12px 30px;border-radius:12px;
+  font-weight:900;font-size:16px;cursor:pointer;margin-top:10px;
+  box-shadow:0 4px 14px rgba(212,175,55,.35);
+}
+.btn-gold:hover{filter:brightness(1.08);}
+.btn-outline{
+  background:transparent;border:1.5px solid var(--gold);color:var(--gold-light);
+  padding:10px 22px;border-radius:10px;font-weight:800;cursor:pointer;font-size:14px;
+}
+.warn-list{text-align:right;background:rgba(231,76,60,.08);border:1px solid rgba(231,76,60,.5);
+  border-radius:10px;padding:14px 18px;margin:14px 0;color:#ffdcd6;font-size:14px;}
+.timer-bar{
+  position:sticky;top:0;z-index:5;background:var(--navy-1);
+  border:1px solid var(--gold);border-radius:12px;
+  padding:10px 18px;display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:16px;font-weight:800;
+}
+.timer-bar #timerDisplay{color:var(--gold-light);font-size:20px;direction:ltr;}
+.quiz-q{background:rgba(255,255,255,.03);border:1px solid var(--card-border);border-radius:12px;
+  padding:16px 18px;margin-bottom:14px;}
+.quiz-q .qtext{font-weight:800;color:var(--text-light);margin-bottom:10px;font-size:15.5px;}
+.quiz-q label{
+  display:block;background:rgba(255,255,255,.02);border:1px solid transparent;
+  border-radius:8px;padding:9px 12px;margin-bottom:7px;cursor:pointer;transition:.15s;
+}
+.quiz-q label:hover{border-color:var(--gold);}
+.quiz-q input[type=radio]{margin-inline-end:8px;}
+.result-card{text-align:center;}
+.result-score{font-size:52px;font-weight:900;color:var(--gold);margin:12px 0;}
+.strength-box, .weak-box{
+  text-align:right;border-radius:10px;padding:14px 18px;margin:10px 0;
+}
+.strength-box{background:rgba(46,204,113,.08);border:1px solid rgba(46,204,113,.5);}
+.weak-box{background:rgba(231,76,60,.08);border:1px solid rgba(231,76,60,.5);}
+
+/* Teacher dashboard */
+.teacher-gate{max-width:420px;margin:0 auto;text-align:center;}
+table.dash{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:16px;}
+table.dash th{background:var(--gold-dark);color:#151000;padding:8px;border:1px solid var(--gold);position:sticky;top:0;}
+table.dash td{padding:8px;border:1px solid var(--card-border);color:var(--text-light);background:rgba(255,255,255,.03);}
+.dash-wrap{overflow-x:auto;}
+.stat-cards{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px;}
+.stat-card{flex:1;min-width:150px;background:rgba(212,175,55,.08);border:1px solid var(--gold);
+  border-radius:12px;padding:14px;text-align:center;}
+.stat-card .num{font-size:26px;font-weight:900;color:var(--gold-light);}
+.stat-card .lbl{font-size:13px;color:var(--text-dim);margin-top:4px;}
+footer.site-footer{
+  text-align:center;color:var(--text-dim);font-size:13px;padding:20px 0 6px;
+  border-top:1px solid var(--card-border);margin-top:26px;
+}
+.small-note{font-size:12.5px;color:var(--text-dim);}
+.review-toc{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
+.review-toc a{
+  background:var(--navy-4);border:1px solid var(--card-border);color:var(--gold-light);
+  padding:6px 14px;border-radius:16px;font-size:13px;text-decoration:none;font-weight:700;
+}
+.review-toc a:hover{border-color:var(--gold);}
+
+/* ===== Approved-version motion system ===== */
+.card{animation:cardIn .6s ease both;}
+@keyframes cardIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+.brand-badge{animation:pulseGlow 3s ease-in-out infinite;}
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 14px rgba(212,175,55,.45), inset 0 0 8px rgba(0,0,0,.35);}50%{box-shadow:0 0 28px rgba(212,175,55,.85), inset 0 0 8px rgba(0,0,0,.35);}}
+.orbit-wrap{display:flex;justify-content:center;margin:10px 0 18px;}
+.orbit-wrap svg{max-width:300px;width:100%;height:auto;}
+.orbit-arm{transform-origin:150px 150px;animation:spin 8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.center-pulse{transform-origin:150px 150px;animation:pulseDot 2s ease-in-out infinite;}
+@keyframes pulseDot{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.5);opacity:.7;}}
+.body-pulse{animation:pulseBody 1.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center;}
+@keyframes pulseBody{0%,100%{transform:scale(1);}50%{transform:scale(1.25);}}
+.share-row{text-align:center;margin-top:16px;}
+.btn-share{background:#25D366;color:#06210f;border:none;padding:11px 24px;border-radius:12px;font-weight:900;font-size:15px;cursor:pointer;font-family:inherit;}
+.btn-share:hover{filter:brightness(1.08);}
+.share-toast{display:none;margin-top:10px;color:var(--gold-light);font-weight:700;font-size:14px;}
+.teacher-link{background:none;border:none;color:var(--text-dim);font-size:12px;cursor:pointer;text-decoration:underline;opacity:.7;font-family:inherit;margin-top:8px;}
+.teacher-link:hover{opacity:1;color:var(--gold-light);}
+.diagram-wrap{display:flex;justify-content:center;margin:10px 0;}
+.diagram-wrap svg{max-width:460px;width:100%;height:auto;}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important;}
+}
+
+.ia-grid{display:grid;grid-template-columns:1fr minmax(0,300px) 1fr;gap:8px;align-items:center}
+.ia-box{background:rgba(5,11,26,.9);border:1.5px solid var(--gold);border-radius:10px;padding:8px;text-align:center;margin:6px 0;font-size:.9rem}
+.ia-box b{display:block;font-size:1.05rem;direction:ltr;color:#fff4d1}
+.ia-sl{display:grid;grid-template-columns:70px 1fr 80px;gap:8px;align-items:center;margin:6px 0}
+.ia-sl output{direction:ltr;text-align:left;color:var(--gold-light);font-weight:700}
+@media(max-width:560px){.ia-grid{grid-template-columns:1fr 1fr}.ia-grid .ia-mid{grid-column:1/3;order:-1}}
+</style>
+</head>
+<body>
+
+<div class="watermark-layer" id="watermarkLayer"></div>
+
+<div class="page-wrap">
+
+  <header class="site-header">
+    <div class="brand-row">
+      <div class="brand-badge">AN</div>
+      <div>
+        <h1 class="main-title">أكاديمية النور للتعلم عن بعد</h1>
+        <div class="sub-en">AL NOOR ONLINE ACADEMY</div>
+      </div>
+    </div>
+    <div class="header-meta">للتواصل: <b dir="ltr">002-0114-5450-751</b></div>
+    <div class="lecture-title">
+      التسارع المركزي والقوة المركزية
+      <span class="grade-badge">الصف الثاني عشر — قطر</span>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button data-target="home" class="active">🏠 الرئيسية</button>
+    <button data-target="explain">📘 شرح</button>
+    <button data-target="review">📝 مراجعة</button>
+    <button data-target="quiz">🧪 اختبار</button>
+  </nav>
+
+  <!-- HOME -->
+  <section class="view active" id="view-home">
+    <div class="card">
+      <h2 class="section-title">مرحباً بك في المحاضرة التفاعلية</h2>
+      <p>تغطي هذه المحاضرة موضوع <b>التسارع المركزي والقوة المركزية</b> ضمن منهج الصف الثاني عشر (دولة قطر)، وتنقسم إلى ثلاثة أقسام:</p>
+      <ul class="pointy">
+        <li><b>📘 شرح:</b> شرح مبسط بثلاثة أجزاء (التسارع المركزي، القوة المركزية، بدلالة السرعة الزاوية) مع رسومات ورسم تفاعلي.</li>
+        <li><b>📝 مراجعة:</b> ملخص للنقاط الأساسية وأمثلة محلولة وتدريبات مع إجاباتها.</li>
+        <li><b>🧪 اختبار:</b> اختبار إلكتروني من 20 سؤال اختيار من متعدد، مدته ساعة واحدة، ويتطلب الاسم الثلاثي والبريد الإلكتروني.</li>
+      </ul>
+      <div class="orbit-wrap">
+        <svg viewBox="0 0 300 300" aria-hidden="true">
+          <circle cx="150" cy="150" r="110" fill="none" stroke="#d4af37" stroke-opacity=".45" stroke-width="2" stroke-dasharray="4 6"/>
+          <line x1="150" y1="150" x2="260" y2="150" stroke="#f1d375" stroke-opacity=".5" stroke-width="1.5"/>
+          <g class="orbit-arm">
+            <line x1="150" y1="150" x2="260" y2="150" stroke="#f1d375" stroke-width="2"/>
+            <circle class="body-pulse" cx="260" cy="150" r="10" fill="#d4af37" stroke="#fff4d1" stroke-width="2"/>
+          </g>
+          <circle class="center-pulse" cx="150" cy="150" r="5" fill="#f1d375"/>
+          <text x="150" y="140" fill="#f1d375" font-size="14" text-anchor="middle" font-family="Tahoma">M</text>
+        </svg>
+      </div>
+      <div class="share-row">
+        <button class="btn-share" onclick="shareLesson()">📲 مشاركة عبر واتساب</button>
+        <div class="share-toast" id="shareToast">تم نسخ رسالة المشاركة ✔ الصقها في واتساب</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPLAIN -->
+  <section class="view" id="view-explain">
+    <div class="card">
+      <h2 class="section-title">📘 شرح الدرس</h2>
+      <h3 class="part-title">الجزء الأول: التسارع المركزي</h3>
+      <h4 class="point-title">1) لماذا يتسارع الجسم في الحركة الدائرية المنتظمة؟</h4>
+      <p>في الحركة الدائرية المنتظمة يبقى <b>مقدار</b> السرعة ثابتاً، لكن <b>اتجاه</b> متجه السرعة يتغير باستمرار لأنه دائماً مماس للمسار. والتسارع هو معدل تغير متجه السرعة، لذلك يتسارع الجسم رغم ثبات مقدار سرعته.</p>
+      <h4 class="point-title">2) التسارع المركزي</h4>
+      <p>التسارع المركزي <b>هو التسارع الذي يغيّر اتجاه السرعة، ويتجه دائماً نحو مركز الدائرة، وهو عمودي على متجه السرعة.</b></p>
+      <p style="text-align:center;font-size:1.3rem;direction:ltr;color:var(--gold-light);font-weight:700">a<sub>c</sub> = v² / r</p>
+      <p>وحدته m/s²، حيث v السرعة بوحدة m/s و r نصف القطر بوحدة m.</p>
+      <h4 class="point-title">3) العوامل المؤثرة</h4>
+      <ul class="pointy">
+        <li>يتناسب <b>طردياً</b> مع مربع السرعة: إذا تضاعفت v صار a<sub>c</sub> أربعة أمثال.</li>
+        <li>يتناسب <b>عكسياً</b> مع نصف القطر: إذا تضاعف r صار a<sub>c</sub> نصف قيمته.</li>
+      </ul>
+      <div class="example-box">
+        <h5>مثال: جسم يتحرك في دائرة</h5>
+        <div class="diagram-wrap" id="diagExplain1"></div>
+        <p>r = 2 m ، v = 4 m/s. المطلوب: التسارع المركزي.<br>a<sub>c</sub> = v² / r = 16 / 2 = <b>8 m/s²</b> نحو المركز.</p>
+      </div>
+
+      <h3 class="part-title">الجزء الثاني: القوة المركزية</h3>
+      <h4 class="point-title">4) القوة المركزية</h4>
+      <p>القوة المركزية <b>هي القوة المحصلة المؤثرة في الجسم باتجاه مركز الدائرة، وهي التي تجعله يتحرك في مسار دائري.</b> وبتطبيق القانون الثاني لنيوتن (F = m a):</p>
+      <p style="text-align:center;font-size:1.3rem;direction:ltr;color:var(--gold-light);font-weight:700">F<sub>c</sub> = m a<sub>c</sub> = m v² / r</p>
+      <p>وحدتها النيوتن (N)، واتجاهها دائماً نحو المركز.</p>
+      <h4 class="point-title">5) مصدر القوة المركزية</h4>
+      <p>القوة المركزية ليست قوة جديدة، بل هي محصلة قوى موجودة أصلاً، وتختلف باختلاف الحالة:</p>
+      <table class="compare">
+        <tr><th>الحالة</th><th>القوة التي تقوم بدور القوة المركزية</th></tr>
+        <tr><td>حجر مربوط بخيط يدور أفقياً</td><td>قوة شد الخيط</td></tr>
+        <tr><td>سيارة تدخل منعطفاً أفقياً</td><td>قوة الاحتكاك بين الإطارات والطريق</td></tr>
+        <tr><td>قمر يدور حول الأرض</td><td>قوة الجاذبية</td></tr>
+      </table>
+      <h4 class="point-title">6) ماذا لو انعدمت القوة المركزية؟</h4>
+      <p>ينطلق الجسم في خط مستقيم على <b>مماس</b> المسار بسرعته لحظة انعدامها، وفقاً لقانون نيوتن الأول.</p>
+      <div class="example-box">
+        <h5>مثال: كتلة تدور بخيط</h5>
+        <div class="diagram-wrap" id="diagExplain2"></div>
+        <p>m = 0.5 kg ، r = 3 m ، v = 6 m/s. المطلوب: القوة المركزية.<br>a<sub>c</sub> = v² / r = 36 / 3 = 12 m/s²<br>F<sub>c</sub> = m a<sub>c</sub> = 0.5 × 12 = <b>6 N</b></p>
+      </div>
+      <h3 class="part-title">الجزء الثالث: بدلالة السرعة الزاوية</h3>
+      <h4 class="point-title">7) العلاقة بين السرعة الخطية والزاوية</h4>
+      <p>السرعة الزاوية ω هي الزاوية التي يقطعها الجسم في وحدة الزمن، وتقاس بوحدة rad/s، وترتبط بالسرعة الخطية بالعلاقة:</p>
+      <p style="text-align:center;font-size:1.3rem;direction:ltr;color:var(--gold-light);font-weight:700">v = ω r</p>
+      <p style="text-align:center;font-size:1.3rem;direction:ltr;color:var(--gold-light);font-weight:700">ω = 2π f = 2π / T</p>
+      <p>حيث f التردد بوحدة Hz و T الزمن الدوري بوحدة s.</p>
+      <h4 class="point-title">8) التسارع المركزي والقوة المركزية بدلالة ω</h4>
+      <p>بالتعويض بـ v = ω r في القانونين السابقين:</p>
+      <p style="text-align:center;font-size:1.3rem;direction:ltr;color:var(--gold-light);font-weight:700">a<sub>c</sub> = ω² r</p>
+      <p style="text-align:center;font-size:1.3rem;direction:ltr;color:var(--gold-light);font-weight:700">F<sub>c</sub> = m ω² r</p>
+      <h4 class="point-title">9) العوامل المؤثرة</h4>
+      <ul class="pointy">
+        <li>تتناسب F<sub>c</sub> <b>طردياً</b> مع مربع ω: إذا تضاعفت ω صارت F<sub>c</sub> أربعة أمثال.</li>
+        <li>تتناسب F<sub>c</sub> <b>طردياً</b> مع r عند ثبات ω: إذا تضاعف r تضاعفت F<sub>c</sub>.</li>
+        <li>تتناسب F<sub>c</sub> <b>طردياً</b> مع الكتلة m.</li>
+        <li>انتبه: عند ثبات v تتناسب F<sub>c</sub> <b>عكسياً</b> مع r، أما عند ثبات ω فتتناسب <b>طردياً</b> معه.</li>
+      </ul>
+      <div class="example-box">
+        <h5>مثال: قوة مركزية بدلالة ω</h5>
+        <div class="diagram-wrap" id="diagExplain3"></div>
+        <p>جسم كتلته 0.2 kg يدور في دائرة نصف قطرها 0.5 m بسرعة زاوية 4 rad/s. المطلوب: القوة المركزية.<br>F<sub>c</sub> = m ω² r = 0.2 × 16 × 0.5 = <b>1.6 N</b><br>للتحقق: v = ω r = 2 m/s، و m v² / r = 0.2 × 4 / 0.5 = 1.6 N ✔</p>
+      </div>
+      <h4 class="point-title">🎮 رسم تفاعلي</h4>
+      <p>غيّر قيم r و ω و m وراقب تغير السرعة والتسارع والقوة المركزية:</p>
+      <div class="ia-grid">
+        <div>
+          <div class="ia-box">نصف القطر r<b id="iaBr"></b></div>
+          <div class="ia-box">الكتلة m<b id="iaBm"></b></div>
+        </div>
+        <div class="ia-mid"><svg viewBox="0 0 300 300" aria-label="رسم تفاعلي">
+          <circle id="iaPath" cx="150" cy="150" r="60" fill="rgba(212,175,55,.08)" stroke="#d4af37" stroke-opacity=".55" stroke-width="2" stroke-dasharray="6 5"/>
+          <line id="iaRad" stroke="#f1d375" stroke-width="2"/>
+          <circle cx="150" cy="150" r="4.5" fill="#f1d375"/>
+          <g id="iaArrows"></g>
+          <circle id="iaBall" r="8" fill="#fff" stroke="#d4af37" stroke-width="2"/>
+        </svg></div>
+        <div>
+          <div class="ia-box">ω<b id="iaBw"></b></div>
+          <div class="ia-box" style="border-color:#7ec8ff">v = ω r<b id="iaBv"></b></div>
+          <div class="ia-box" style="border-color:#ff9f43">a<sub>c</sub> = ω² r<b id="iaBa"></b></div>
+          <div class="ia-box" style="border-color:#ff9f43">F<sub>c</sub> = m ω² r<b id="iaBf"></b></div>
+        </div>
+      </div>
+      <p style="text-align:center;font-size:.9rem">🔵 السهم الأزرق: السرعة (مماس) &nbsp; 🟠 السهم البرتقالي: القوة والتسارع نحو المركز</p>
+      <div class="ia-sl"><span>r (m)</span><input type="range" id="iaR" min="1" max="5" step="0.5" value="3"><output id="iaRo"></output></div>
+      <div class="ia-sl"><span>ω (rad/s)</span><input type="range" id="iaW" min="1" max="10" step="0.5" value="3"><output id="iaWo"></output></div>
+      <div class="ia-sl"><span>m (kg)</span><input type="range" id="iaM" min="0.5" max="5" step="0.5" value="1"><output id="iaMo"></output></div>
+    </div>
+  </section>
+
+  <!-- REVIEW -->
+  <section class="view" id="view-review">
+    <div class="card">
+      <h2 class="section-title">📝 مراجعة سريعة</h2>
+      <div class="review-toc">
+        <a href="#rev-summary">ملخص النقاط</a>
+        <a href="#rev-solved">الأمثلة المحلولة</a>
+        <a href="#rev-drills">التدريبات</a>
+      </div>
+      <h4 class="point-title" id="rev-summary">ملخص النقاط الأساسية</h4>
+      <ul class="pointy">
+        <li>في الحركة الدائرية المنتظمة يتغير اتجاه السرعة باستمرار، لذلك يوجد تسارع رغم ثبات مقدار السرعة.</li>
+        <li>التسارع المركزي: <b>a<sub>c</sub> = v² / r</b> — يتجه نحو المركز وعمودي على السرعة — وحدته m/s².</li>
+        <li>القوة المركزية: <b>F<sub>c</sub> = m v² / r</b> — محصلة القوى باتجاه المركز — وحدتها N.</li>
+        <li>القوة المركزية ليست قوة جديدة: شد الخيط، الاحتكاك، الجاذبية، وغيرها.</li>
+        <li>بدلالة السرعة الزاوية: <b>v = ω r</b> ، <b>a<sub>c</sub> = ω² r</b> ، <b>F<sub>c</sub> = m ω² r</b> ، و ω = 2π f = 2π / T (rad/s).</li>
+        <li>a<sub>c</sub> ∝ v² وعكسياً مع r، و F<sub>c</sub> ∝ m.</li>
+        <li>عند انعدام القوة المركزية يتحرك الجسم على مماس المسار في خط مستقيم.</li>
+      </ul>
+      <h4 class="point-title" id="rev-solved">الأمثلة المحلولة (بالحل الكامل)</h4>
+      <div class="example-box">
+        <h5>مثال 1: سيارة في منعطف</h5>
+        <div class="diagram-wrap" id="diagReview1"></div>
+        <p>سيارة كتلتها 1000 kg تدخل منعطفاً أفقياً نصف قطره 50 m بسرعة 10 m/s. احسب القوة المركزية، وما مصدرها؟</p>
+        <button class="solution-toggle" onclick="toggleSol(this)">إظهار/إخفاء الحل</button>
+        <div class="solution-body">F<sub>c</sub> = m v² / r = 1000 × 100 / 50 = <b>2000 N</b><br>مصدرها قوة الاحتكاك بين الإطارات والطريق.</div>
+      </div>
+      <div class="example-box">
+        <h5>مثال 2: إيجاد السرعة</h5>
+        <div class="diagram-wrap" id="diagReview2"></div>
+        <p>جسم يتحرك في دائرة نصف قطرها 0.4 m بتسارع مركزي 10 m/s². احسب سرعته.</p>
+        <button class="solution-toggle" onclick="toggleSol(this)">إظهار/إخفاء الحل</button>
+        <div class="solution-body">a<sub>c</sub> = v² / r ⟹ v² = a<sub>c</sub> × r = 10 × 0.4 = 4<br>v = <b>2 m/s</b></div>
+      </div>
+      <div class="example-box">
+        <h5>مثال 3: بدلالة السرعة الزاوية</h5>
+        <div class="diagram-wrap" id="diagReview3"></div>
+        <p>جسم كتلته 0.1 kg يدور بتردد 1 Hz في دائرة نصف قطرها 0.25 m. احسب التسارع المركزي والقوة المركزية.</p>
+        <button class="solution-toggle" onclick="toggleSol(this)">إظهار/إخفاء الحل</button>
+        <div class="solution-body">ω = 2π f = 2π × 1 = 6.28 rad/s<br>a<sub>c</sub> = ω² r = (6.28)² × 0.25 ≈ <b>9.86 m/s²</b><br>F<sub>c</sub> = m a<sub>c</sub> = 0.1 × 9.86 ≈ <b>0.99 N ≈ 1 N</b></div>
+      </div>
+      <div class="example-box">
+        <h5>مثال 4: إيجاد السرعة الزاوية</h5>
+        <div class="diagram-wrap" id="diagReview4"></div>
+        <p>جسم كتلته 2 kg يدور في دائرة نصف قطرها 0.25 m تحت تأثير قوة مركزية 32 N. احسب سرعته الزاوية.</p>
+        <button class="solution-toggle" onclick="toggleSol(this)">إظهار/إخفاء الحل</button>
+        <div class="solution-body">F<sub>c</sub> = m ω² r ⟹ ω² = F<sub>c</sub> / (m r) = 32 / (2 × 0.25) = 64<br>ω = <b>8 rad/s</b></div>
+      </div>
+      <h4 class="point-title" id="rev-drills">التدريبات (الإجابات النهائية)</h4>
+      <div id="drillsContainer"></div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="view" id="view-quiz">
+    <div class="card" id="quizGateCard">
+      <h2 class="section-title">🧪 الاختبار الإلكتروني</h2>
+      <div class="warn-list">
+        <b>⚠️ تنبيهات هامة قبل بدء الاختبار:</b>
+        <ul class="pointy" style="margin-top:8px;">
+          <li>يجب إدخال <b>الاسم الثلاثي</b> و<b>البريد الإلكتروني</b> (حقلان إلزاميان) قبل بدء الاختبار.</li>
+          <li>مدة الاختبار <b>ساعة واحدة (60 دقيقة)</b> بالضبط، تُحسب من لحظة الضغط على "بدء الاختبار".</li>
+          <li>عند انتهاء الوقت يُغلق الاختبار تلقائياً ويتم تسليم إجاباتك الحالية فوراً.</li>
+          <li>عدد الأسئلة 20 سؤالاً من نوع اختيار من متعدد.</li>
+          <li>لا يمكن إعادة فتح الاختبار بعد التسليم أو انتهاء الوقت.</li>
+        </ul>
+      </div>
+      <div class="quiz-gate">
+        <input type="text" id="studentName" placeholder="الاسم الثلاثي (إلزامي)">
+        <input type="email" id="studentEmail" placeholder="البريد الإلكتروني (إلزامي)">
+        <div><button class="btn-gold" onclick="startQuiz()">🚀 بدء الاختبار</button></div>
+        <p id="gateError" style="color:#ff8b7d;font-weight:700;"></p>
+      </div>
+    </div>
+
+    <div class="card" id="quizRunningCard" style="display:none;">
+      <div class="timer-bar">
+        <span>⏱️ الوقت المتبقي</span>
+        <span id="timerDisplay">60:00</span>
+      </div>
+      <form id="quizForm"></form>
+      <div style="text-align:center;">
+        <button class="btn-gold" onclick="submitQuiz(false)">✅ تسليم الاختبار</button>
+      </div>
+    </div>
+
+    <div class="card result-card" id="quizResultCard" style="display:none;">
+      <h2 class="section-title">نتيجة الاختبار</h2>
+      <div class="result-score" id="scoreDisplay">--/20</div>
+      <p id="resultStudentInfo"></p>
+      <div class="strength-box" id="strengthBox"></div>
+      <div class="weak-box" id="weakBox"></div>
+      <p class="small-note">تم تسجيل نتيجتك بنجاح.</p>
+    </div>
+  </section>
+
+  <!-- TEACHER -->
+  <section class="view" id="view-teacher">
+    <div class="card teacher-gate" id="teacherGateCard">
+      <h2 class="section-title">🔐 لوحة المدرس</h2>
+      <p>هذه اللوحة مخصصة للمعلم لمتابعة نتائج الطلاب. الرجاء إدخال رمز الدخول.</p>
+      <input type="password" id="teacherPass" placeholder="رمز دخول المعلم" style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--card-border);background:rgba(255,255,255,.05);color:var(--text-light);">
+      <div><button class="btn-gold" onclick="checkTeacherPass()">دخول</button></div>
+      <p id="teacherGateError" style="color:#ff8b7d;font-weight:700;"></p>
+    </div>
+
+    <div class="card" id="teacherPanel" style="display:none;">
+      <h2 class="section-title">📊 نتائج الطلاب</h2>
+      <div class="stat-cards" id="statCards"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+        <button class="btn-outline" onclick="loadTeacherData()">🔄 تحديث البيانات</button>
+        <button class="btn-gold" onclick="exportExcel()">⬇️ تصدير Excel</button>
+      </div>
+      <div class="dash-wrap">
+        <table class="dash" id="dashTable">
+          <thead>
+            <tr>
+              <th>الاسم</th><th>البريد الإلكتروني</th><th>الدرجة</th><th>صحيح</th><th>خطأ</th>
+              <th>بداية الاختبار</th><th>نهاية الاختبار</th><th>نقاط القوة</th><th>نقاط الضعف</th>
+            </tr>
+          </thead>
+          <tbody id="dashBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    أكاديمية النور للتعلم عن بعد · Al Noor Online Academy · <span dir="ltr">002-0114-5450-751</span><br>مستر أحمد هاشم – مدرس الفيزياء · Mr. Ahmed Hashem – Physics Teacher<br><button class="teacher-link" onclick="showView('teacher')">لوحة المدرس</button>
+  </footer>
+</div>
+
+<script>
+/* ---------------- Watermark generation ---------------- */
+(function(){
+  const layer = document.getElementById('watermarkLayer');
+  for(let i=0;i<60;i++){
+    const s = document.createElement('span');
+    s.textContent = 'أكاديمية النور';
+    layer.appendChild(s);
+  }
+})();
+
+/* ---------------- Navigation ---------------- */
+const tabButtons = document.querySelectorAll('nav.tabs button');
+function showView(name){
+  tabButtons.forEach(b=>b.classList.toggle('active', b.dataset.target===name));
+  document.querySelectorAll('section.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+name).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+tabButtons.forEach(btn=>btn.addEventListener('click',()=>showView(btn.dataset.target)));
+
+/* ---------------- WhatsApp share ---------------- */
+async function shareLesson(){
+  const url = location.href.split('#')[0];
+  const text = "التسارع المركزي والقوة المركزية – الصف الثاني عشر\nأكاديمية النور للتعلم عن بعد – مستر أحمد هاشم، مدرس الفيزياء\n"+url;
+  if(navigator.share){
+    try{ await navigator.share({title:"التسارع المركزي والقوة المركزية", text:text}); return; }catch(e){ if(e && e.name==='AbortError') return; }
+  }
+  try{ await navigator.clipboard.writeText(text); }
+  catch(e){
+    const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select();
+    try{document.execCommand('copy');}catch(_){}
+    document.body.removeChild(ta);
+  }
+  const t=document.getElementById('shareToast'); t.style.display='block';
+  setTimeout(()=>t.style.display='none',4000);
+}
+
+/* ---------------- Storage helper (works inside Claude artifact; falls back to memory) ---------------- */
+const memoryStore = {};
+const LS_PREFIX = 'an_cent_';
+async function storeSet(key, value){
+  try{ localStorage.setItem(LS_PREFIX+key, value); return true; }catch(e){ memoryStore[key]=value; return true; }
+}
+async function storeGet(key){
+  try{ const v=localStorage.getItem(LS_PREFIX+key); if(v!==null) return {key,value:v}; }catch(e){}
+  if(key in memoryStore) return {key,value:memoryStore[key]};
+  return null;
+}
+async function storeList(prefix){
+  const keys=new Set();
+  try{ for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(k.startsWith(LS_PREFIX+prefix)) keys.add(k.slice(LS_PREFIX.length)); } }catch(e){}
+  Object.keys(memoryStore).forEach(k=>{ if(k.startsWith(prefix)) keys.add(k); });
+  return {keys:[...keys]};
+}
+
+/* ---------------- Toggle solution ---------------- */
+function toggleSol(btn){
+  const body = btn.nextElementSibling;
+  body.classList.toggle('show');
+}
+
+/* ---------------- Drills data (review section, answer-only) ---------------- */
+
+/* ---------------- Precision diagram generators (SVG) ---------------- */
+function polarPt(cx,cy,r,deg){const rad=deg*Math.PI/180;return [cx+r*Math.cos(rad), cy+r*Math.sin(rad)];}
+
+/* Side data box: text is wrapped into lines and placed in a fixed column to the LEFT or RIGHT of the drawing */
+function sideBox(side, yc, text, accent, ax, ay){
+  /* wrap: "text (note)" -> two lines without parentheses; long "a = b" -> two lines */
+  let lines = String(text).replace(/\)\s*$/,'').split(/\s*\(\s*/).filter(Boolean);
+  lines = lines.flatMap(l => (l.length>11 && l.includes(' = ')) ? [l.split(' = ')[0], '= '+l.split(' = ').slice(1).join(' = ')] : [l]);
+  const fs = 13, lh = 17;
+  const longest = Math.max(...lines.map(l=>l.length));
+  const w = Math.min(108, Math.max(44, longest*7 + 14));
+  const h = lines.length*lh + 8;
+  const zoneL = 4, zoneR = 456;
+  const x = side==='right' ? zoneR - w : zoneL;
+  const y = Math.min(300-h/2-4, Math.max(h/2+4, yc));
+  const edgeX = side==='right' ? x : x + w;
+  const tspans = lines.map((l,i)=>`<text x="${(x+w/2).toFixed(1)}" y="${(y - h/2 + 4 + lh*(i+0.75)).toFixed(1)}" fill="#fff4d1" font-size="${fs}" font-weight="bold" text-anchor="middle" font-family="Tahoma">${l}</text>`).join('');
+  const leader = (ax!==undefined) ? `<polyline points="${edgeX.toFixed(1)},${y.toFixed(1)} ${ax.toFixed(1)},${ay.toFixed(1)}" fill="none" stroke="${accent}" stroke-width="1.3" stroke-dasharray="4 3" stroke-opacity=".85"/><circle cx="${ax.toFixed(1)}" cy="${ay.toFixed(1)}" r="3.2" fill="${accent}"/>` : '';
+  return `<g>${leader}<rect x="${x.toFixed(1)}" y="${(y-h/2).toFixed(1)}" width="${w.toFixed(1)}" height="${h}" rx="7" fill="rgba(5,11,26,.92)" stroke="${accent}" stroke-width="1.2"/>${tspans}</g>`;
+}
+
+/* Small point badge (M, A, B) kept next to the point itself */
+function labelBadge(x,y,text,color,bg){
+  color = color || '#fff4d1';
+  bg = bg || 'rgba(5,11,26,.92)';
+  const w = Math.max(26, text.length*7.4 + 14);
+  const h = 20;
+  return `<g>
+    <rect x="${(x-w/2).toFixed(1)}" y="${(y-h/2).toFixed(1)}" width="${w.toFixed(1)}" height="${h}" rx="6" fill="${bg}" stroke="#d4af37" stroke-width="1"/>
+    <text x="${x.toFixed(1)}" y="${(y+4.5).toFixed(1)}" fill="${color}" font-size="13" font-weight="bold" text-anchor="middle" font-family="Tahoma">${text}</text>
+  </g>`;
+}
+
+function circleArcSVG(opts){
+  const {arcDeg=90,startDeg=-90,r=80,cx=230,cy=150,rLabel='r',sLabel='S',showAB=true,ptA='A',ptB='B'}=opts;
+  const [sx,sy]=polarPt(cx,cy,r,startDeg);
+  const endDeg=startDeg+arcDeg;
+  const [ex,ey]=polarPt(cx,cy,r,endDeg);
+  const large=arcDeg>180?1:0;
+  const midDeg=startDeg+arcDeg/2;
+  const [amx,amy]=polarPt(cx,cy,r,midDeg);          /* anchor of S on the arc */
+  const [rax,ray]=polarPt(cx,cy,r*0.5,startDeg);     /* anchor of r on the radius */
+  const [ax,ay]=polarPt(cx,cy,r*1.32,startDeg);
+  const [bx,by]=polarPt(cx,cy,r*1.32,endDeg);
+  /* S box goes to the side where the arc's middle lies; r box goes to the opposite side (clear of the sector) */
+  const sSide = Math.cos(midDeg*Math.PI/180) >= 0 ? 'right' : 'left';
+  const rSide = sSide==='right' ? 'left' : 'right';
+  return `<svg viewBox="0 0 460 300">
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#d4af37" stroke-opacity=".55" stroke-width="2"/>
+    <path d="M ${cx} ${cy} L ${sx.toFixed(1)} ${sy.toFixed(1)} A ${r} ${r} 0 ${large} 1 ${ex.toFixed(1)} ${ey.toFixed(1)} Z" fill="#d4af37" fill-opacity=".24" stroke="none"/>
+    <line x1="${cx}" y1="${cy}" x2="${sx.toFixed(1)}" y2="${sy.toFixed(1)}" stroke="#f1d375" stroke-width="2.5"/>
+    <line x1="${cx}" y1="${cy}" x2="${ex.toFixed(1)}" y2="${ey.toFixed(1)}" stroke="#f1d375" stroke-width="2.5"/>
+    <circle cx="${cx}" cy="${cy}" r="4.5" fill="#f1d375"/>
+    ${labelBadge(cx-16, cy+18, 'M', '#0e0a00', '#f1d375')}
+    ${sideBox(rSide, ray, rLabel, '#f1d375', rax, ray)}
+    ${sideBox(sSide, amy, sLabel, '#7be3a3', amx, amy)}
+    ${showAB?`<circle cx="${sx.toFixed(1)}" cy="${sy.toFixed(1)}" r="4.5" fill="#ffffff"/>
+    ${labelBadge(ax, ay, ptA, '#0e0a00', '#ffffff')}
+    <circle cx="${ex.toFixed(1)}" cy="${ey.toFixed(1)}" r="4.5" fill="#ffffff"/>
+    ${labelBadge(bx, by, ptB, '#0e0a00', '#ffffff')}`:''}
+  </svg>`;
+}
+
+function clockSVG(fromHour,toHour){
+  const cx=150,cy=150,r=100;
+  const hourDeg=h=>{const hh=h%12; return hh*30-90;};
+  const [fx,fy]=polarPt(cx,cy,r*0.62,hourDeg(fromHour));
+  const [tx,ty]=polarPt(cx,cy,r*0.62,hourDeg(toHour));
+  const arcDeg=(hourDeg(toHour)-hourDeg(fromHour)+360)%360;
+  const large=arcDeg>180?1:0;
+  let numbers='';
+  for(let h=1;h<=12;h++){const [nx,ny]=polarPt(cx,cy,r*0.83,hourDeg(h)); numbers+=`<text x="${nx.toFixed(1)}" y="${(ny+5).toFixed(1)}" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle" font-family="Tahoma">${h}</text>`;}
+  return `<svg viewBox="0 0 300 300">
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#d4af37" stroke-width="3"/>
+    <path d="M ${cx} ${cy} L ${fx.toFixed(1)} ${fy.toFixed(1)} A ${(r*0.62).toFixed(1)} ${(r*0.62).toFixed(1)} 0 ${large} 1 ${tx.toFixed(1)} ${ty.toFixed(1)} Z" fill="#d4af37" fill-opacity=".22"/>
+    ${numbers}
+    <line x1="${cx}" y1="${cy}" x2="${fx.toFixed(1)}" y2="${fy.toFixed(1)}" stroke="#f1d375" stroke-width="4" stroke-linecap="round"/>
+    <line x1="${cx}" y1="${cy}" x2="${tx.toFixed(1)}" y2="${ty.toFixed(1)}" stroke="#f1d375" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="${cx}" cy="${cy}" r="5" fill="#ffffff"/>
+  </svg>`;
+}
+
+function pizzaSVG(total,eaten){
+  const cx=150,cy=150,r=100;
+  let html=`<svg viewBox="0 0 300 300"><circle cx="${cx}" cy="${cy}" r="${r}" fill="#3a2410" stroke="#d4af37" stroke-width="3"/>`;
+  for(let i=0;i<total;i++){
+    const startDeg=i*(360/total)-90;
+    const endDeg=(i+1)*(360/total)-90;
+    const [sx,sy]=polarPt(cx,cy,r,startDeg);
+    const [ex,ey]=polarPt(cx,cy,r,endDeg);
+    const large=(360/total)>180?1:0;
+    const fillC = i<eaten? 'rgba(255,255,255,0.05)':'rgba(212,175,55,.4)';
+    html+=`<path d="M ${cx} ${cy} L ${sx.toFixed(1)} ${sy.toFixed(1)} A ${r} ${r} 0 ${large} 1 ${ex.toFixed(1)} ${ey.toFixed(1)} Z" fill="${fillC}" stroke="#0b1530" stroke-width="1.5"/>`;
+  }
+  html+=`</svg>`;
+  return html;
+}
+
+function tangentSVG(){
+  const cx=230,cy=150,r=80,bodyDeg=-40;
+  const [bx,by]=polarPt(cx,cy,r,bodyDeg);
+  const tanDeg=bodyDeg-90;
+  const [tx,ty]=polarPt(bx,by,62,tanDeg);
+  const mx=(bx+tx)/2, my=(by+ty)/2;
+  return `<svg viewBox="0 0 460 300">
+    <defs><marker id="arrowhead" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#7be3a3"/></marker></defs>
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#d4af37" stroke-dasharray="5 5" stroke-width="2"/>
+    <line x1="${cx}" y1="${cy}" x2="${bx.toFixed(1)}" y2="${by.toFixed(1)}" stroke="#f1d375" stroke-width="2" stroke-dasharray="3 4"/>
+    <circle cx="${bx.toFixed(1)}" cy="${by.toFixed(1)}" r="6" fill="#d4af37"/>
+    <line x1="${bx.toFixed(1)}" y1="${by.toFixed(1)}" x2="${tx.toFixed(1)}" y2="${ty.toFixed(1)}" stroke="#7be3a3" stroke-width="3" marker-end="url(#arrowhead)"/>
+    ${sideBox('left', my, 'مسار الجسم (مماس)', '#7be3a3', mx, my)}
+    <circle cx="${cx}" cy="${cy}" r="4" fill="#fff"/>
+    ${labelBadge(cx-16, cy+18, 'M', '#0e0a00', '#f1d375')}
+  </svg>`;
+}
+
+function arrowSVG(x1,y1,x2,y2,c){
+  const g=Math.atan2(y2-y1,x2-x1),h=11;
+  const p1=[x2-h*Math.cos(g-0.4),y2-h*Math.sin(g-0.4)],p2=[x2-h*Math.cos(g+0.4),y2-h*Math.sin(g+0.4)];
+  return `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${c}" stroke-width="3"/><polygon points="${x2.toFixed(1)},${y2.toFixed(1)} ${p1[0].toFixed(1)},${p1[1].toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}" fill="${c}"/>`;
+}
+/* Circular motion drawing: data boxes are placed to the LEFT and RIGHT of the drawing (approved method) */
+function centripetalSVG(o){
+  const {r=80,cx=230,cy=150,theta=-50,rL='',mL='',vL='',aL='',fL='',wL='',arrowTxt='a'}=o;
+  const th=theta*Math.PI/180, px=cx+r*Math.cos(th), py=cy+r*Math.sin(th);
+  const vEnd=[px-Math.sin(th)*62, py+Math.cos(th)*62];
+  const aEnd=[px-Math.cos(th)*48, py-Math.sin(th)*48];
+  const rax=cx+(px-cx)*0.5, ray=cy+(py-cy)*0.5;
+  return `<svg viewBox="0 0 460 300">
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="#d4af37" fill-opacity=".08" stroke="#d4af37" stroke-opacity=".55" stroke-width="2" stroke-dasharray="6 5"/>
+    <line x1="${cx}" y1="${cy}" x2="${px.toFixed(1)}" y2="${py.toFixed(1)}" stroke="#f1d375" stroke-width="2"/>
+    <circle cx="${cx}" cy="${cy}" r="4.5" fill="#f1d375"/>
+    ${labelBadge(cx-16, cy+18, 'M', '#0e0a00', '#f1d375')}
+    ${arrowSVG(px,py,vEnd[0],vEnd[1],'#7ec8ff')}
+    ${arrowSVG(px,py,aEnd[0],aEnd[1],'#ff9f43')}
+    <circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="7" fill="#ffffff" stroke="#d4af37" stroke-width="2"/>
+    ${labelBadge(vEnd[0]+14, vEnd[1]+14, 'v', '#0e0a00', '#7ec8ff')}
+    ${labelBadge(aEnd[0]-16, aEnd[1]+12, arrowTxt, '#0e0a00', '#ff9f43')}
+    ${rL?sideBox('left',100,rL,'#f1d375',rax,ray):''}
+    ${mL?sideBox('left',195,mL,'#f1d375'):''}
+    ${vL?sideBox('right',95,vL,'#7ec8ff',vEnd[0],vEnd[1]):''}
+    ${aL?sideBox('right',165,aL,'#ff9f43'):''}
+    ${fL?sideBox('right',235,fL,'#ff9f43'):''}
+    ${wL?sideBox('right',38,wL,'#7be3a3'):''}
+  </svg>`;
+}
+const drills = [
+  {q:"ما المصطلح العلمي الدال على: التسارع الذي يتجه دائماً نحو مركز الدائرة؟", a:"التسارع المركزي"},
+  {q:"ما المصطلح العلمي الدال على: القوة المحصلة باتجاه المركز التي تجعل الجسم يتحرك في مسار دائري؟", a:"القوة المركزية"},
+  {q:"جسم يتحرك بسرعة 3 m/s في دائرة نصف قطرها 1.5 m. احسب تسارعه المركزي.", a:"6 m/s²"},
+  {q:"جسم كتلته 2 kg يتحرك بسرعة 5 m/s في دائرة نصف قطرها 5 m. احسب القوة المركزية.", a:"10 N"},
+  {q:"ما القوة التي تقوم بدور القوة المركزية لحجر يدور أفقياً بخيط؟", a:"قوة شد الخيط"},
+  {q:"إذا زادت السرعة إلى ثلاثة أمثالها مع ثبات نصف القطر، فكم مرة يزداد التسارع المركزي؟", a:"9 أمثال"},
+  {q:"اكتب قانون التسارع المركزي.", a:"a_c = v² / r"},
+  {q:"ماذا يحدث للجسم إذا انعدمت القوة المركزية فجأة؟", a:"يتحرك في خط مستقيم على مماس المسار"},
+  {q:"اكتب قانون القوة المركزية بدلالة السرعة الزاوية.", a:"F_c = m ω² r"},
+  {q:"ما العلاقة بين السرعة الخطية v والسرعة الزاوية ω؟", a:"v = ω r"},
+  {q:"جسم كتلته 0.5 kg يدور في دائرة نصف قطرها 2 m بسرعة زاوية 3 rad/s. احسب القوة المركزية.", a:"F = 0.5 × 9 × 2 = 9 N", d:()=>centripetalSVG({rL:'r = 2 m',mL:'m = 0.5 kg',wL:'ω = 3 rad/s',fL:'Fc = ؟',arrowTxt:'F'})},
+  {q:"جسم يدور بسرعة زاوية 5 rad/s في دائرة نصف قطرها 0.4 m. احسب تسارعه المركزي.", a:"a = 25 × 0.4 = 10 m/s²"},
+  {q:"إذا تضاعفت السرعة الزاوية مع ثبات r و m فكم مرة تزداد القوة المركزية؟", a:"4 أمثال"},
+  {q:"إذا تضاعف نصف القطر مع ثبات ω و m فماذا يحدث للقوة المركزية؟", a:"تتضاعف (ضعفين)"},
+  {q:"جسم كتلته 1 kg يدور في دائرة نصف قطرها 0.5 m تحت قوة مركزية 8 N. احسب ω.", a:"ω² = 8 / 0.5 = 16 ⟹ ω = 4 rad/s"},
+  {q:"جسم يدور بمعدل دورتين كل ثانية. احسب سرعته الزاوية.", a:"ω = 2π × 2 ≈ 12.57 rad/s"}
+];
+function renderDrills(){
+  const cont = document.getElementById('drillsContainer');
+  drills.forEach((d,i)=>{
+    const div = document.createElement('div');
+    div.className='qbox';
+    const diagramHtml = d.d ? `<div class="diagram-wrap">${d.d()}</div>` : '';
+    div.innerHTML = `<div><span class="qnum">${i+1}.</span> ${d.q}</div>
+      ${diagramHtml}
+      <button class="solution-toggle" onclick="this.nextElementSibling.classList.toggle('show')">إظهار/إخفاء الإجابة</button>
+      <div class="solution-body"><span class="answer-only">✔ ${d.a}</span></div>`;
+    cont.appendChild(div);
+  });
+}
+renderDrills();
+
+/* Populate static worked-example diagrams */
+(function(){
+  const e1=centripetalSVG({rL:'r = 2 m',vL:'v = 4 m/s',aL:'ac = 8 m/s²'});
+  const e2=centripetalSVG({rL:'r = 3 m',mL:'m = 0.5 kg',vL:'v = 6 m/s',aL:'ac = 12 m/s²',fL:'Fc = 6 N',arrowTxt:'F'});
+  const e3=centripetalSVG({rL:'r = 50 m',mL:'m = 1000 kg',vL:'v = 10 m/s',fL:'Fc = 2000 N',arrowTxt:'F'});
+  const e4=centripetalSVG({rL:'r = 0.4 m',vL:'v = ؟',aL:'ac = 10 m/s²'});
+  [['diagExplain1',e1],['diagExplain2',e2],['diagReview1',e3],['diagReview2',e4]].forEach(([id,h])=>{const el=document.getElementById(id); if(el) el.innerHTML=h;});
+})();
+
+/* extra static diagrams (angular velocity) */
+(function(){
+  const set=(id,h)=>{const el=document.getElementById(id); if(el) el.innerHTML=h;};
+  set('diagExplain3',centripetalSVG({rL:'r = 0.5 m',mL:'m = 0.2 kg',wL:'ω = 4 rad/s',vL:'v = 2 m/s',fL:'Fc = 1.6 N',arrowTxt:'F'}));
+  set('diagReview3',centripetalSVG({rL:'r = 0.25 m',mL:'m = 0.1 kg',wL:'ω = 6.28 rad/s',aL:'ac = 9.86 m/s²',fL:'Fc ≈ 1 N',arrowTxt:'F'}));
+  set('diagReview4',centripetalSVG({rL:'r = 0.25 m',mL:'m = 2 kg',wL:'ω = ؟',fL:'Fc = 32 N',arrowTxt:'F'}));
+})();
+
+/* interactive drawing: data boxes left and right of the drawing */
+(function(){
+  const g=id=>document.getElementById(id);
+  if(!g('iaR')) return;
+  let r=3,w=3,m=1,ang=0,last=null;
+  function upd(){
+    r=+g('iaR').value; w=+g('iaW').value; m=+g('iaM').value;
+    const v=w*r,a=w*w*r,f=m*a;
+    g('iaRo').textContent=r+' m'; g('iaWo').textContent=w+' rad/s'; g('iaMo').textContent=m+' kg';
+    g('iaBr').textContent=r+' m'; g('iaBm').textContent=m+' kg'; g('iaBw').textContent=w+' rad/s';
+    g('iaBv').textContent=v.toFixed(1)+' m/s'; g('iaBa').textContent=a.toFixed(1)+' m/s²'; g('iaBf').textContent=f.toFixed(1)+' N';
+    g('iaPath').setAttribute('r',r*24);
+  }
+  ['iaR','iaW','iaM'].forEach(i=>g(i).oninput=upd); upd();
+  function frame(t){
+    if(last===null) last=t; const dt=Math.min((t-last)/1000,.1); last=t;
+    const R=r*24; ang+=w*dt*0.5;
+    const x=150+R*Math.cos(ang), y=150+R*Math.sin(ang);
+    g('iaBall').setAttribute('cx',x); g('iaBall').setAttribute('cy',y);
+    g('iaRad').setAttribute('x1',150); g('iaRad').setAttribute('y1',150); g('iaRad').setAttribute('x2',x); g('iaRad').setAttribute('y2',y);
+    const v=w*r,f=m*w*w*r;
+    const lv=Math.min(18+v*3,75), lf=Math.min(14+Math.sqrt(f)*4,70);
+    const tx=-Math.sin(ang),ty=Math.cos(ang),nx=-Math.cos(ang),ny=-Math.sin(ang);
+    const arr=(x2,y2,c)=>{const gg=Math.atan2(y2-y,x2-x),h=10;return `<line x1="${x}" y1="${y}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="3"/><polygon points="${x2},${y2} ${x2-h*Math.cos(gg-.4)},${y2-h*Math.sin(gg-.4)} ${x2-h*Math.cos(gg+.4)},${y2-h*Math.sin(gg+.4)}" fill="${c}"/>`};
+    g('iaArrows').innerHTML=arr(x+tx*lv,y+ty*lv,'#7ec8ff')+arr(x+nx*lf,y+ny*lf,'#ff9f43');
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+
+/* ---------------- Quiz data ---------------- */
+const quizQuestions = [
+  {topic:"مفهوم التسارع المركزي", q:"اتجاه التسارع المركزي دائماً:", opts:["نحو مركز الدائرة", "باتجاه السرعة", "بعيداً عن المركز", "عمودي على مستوى الدائرة"], correct:0},
+  {topic:"مفهوم التسارع المركزي", q:"يتسارع الجسم في الحركة الدائرية المنتظمة لأن:", opts:["مقدار سرعته يتغير", "اتجاه سرعته يتغير باستمرار", "كتلته تتغير", "نصف قطره يتغير"], correct:1},
+  {topic:"مفهوم التسارع المركزي", q:"وحدة قياس التسارع المركزي:", opts:["m/s", "N", "m/s²", "rad"], correct:2},
+  {topic:"مفهوم التسارع المركزي", q:"متجه السرعة في الحركة الدائرية يكون:", opts:["باتجاه المركز", "مماساً للمسار", "بعيداً عن المركز", "عمودياً على مستوى الدائرة"], correct:1},
+  {topic:"مفهوم التسارع المركزي", q:"التسارع المركزي يكون دائماً:", opts:["عمودياً على متجه السرعة", "موازياً لمتجه السرعة", "صفراً", "معاكساً للمركز"], correct:0},
+  {topic:"القوة المركزية", q:"القوة المركزية هي:", opts:["قوة إضافية تُرسم دائماً للخارج", "محصلة القوى المؤثرة باتجاه المركز", "قوة الاحتكاك فقط", "قوة تساوي الوزن دائماً"], correct:1},
+  {topic:"القوة المركزية", q:"قانون القوة المركزية:", opts:["m v r", "m v / r", "m v² / r", "m r / v²"], correct:2},
+  {topic:"القوة المركزية", q:"القوة التي تقوم بدور القوة المركزية لحجر يدور أفقياً بخيط:", opts:["شد الخيط", "الوزن", "الاحتكاك", "دفع اليد للخارج"], correct:0},
+  {topic:"القوة المركزية", q:"في منعطف أفقي تقوم بدور القوة المركزية للسيارة:", opts:["قوة المحرك", "وزن السيارة", "الاحتكاك بين الإطارات والطريق", "مقاومة الهواء"], correct:2},
+  {topic:"القوة المركزية", q:"إذا انقطع الخيط فجأة يتحرك الجسم:", opts:["نحو المركز", "على مماس المسار", "للخارج على امتداد نصف القطر", "في دائرة أصغر"], correct:1},
+  {topic:"المسائل", q:"جسم يتحرك بسرعة 4 m/s في دائرة نصف قطرها 2 m، تسارعه المركزي:", opts:["4 m/s²", "8 m/s²", "16 m/s²", "2 m/s²"], correct:1},
+  {topic:"المسائل", q:"جسم كتلته 0.5 kg يتحرك بسرعة 6 m/s في دائرة نصف قطرها 3 m، القوة المركزية:", opts:["1 N", "3 N", "6 N", "12 N"], correct:2},
+  {topic:"المسائل", q:"عند مضاعفة السرعة مع ثبات نصف القطر يصبح التسارع المركزي:", opts:["ضعفين", "أربعة أمثال", "النصف", "لا يتغير"], correct:1},
+  {topic:"المسائل", q:"عند مضاعفة نصف القطر مع ثبات السرعة يصبح التسارع المركزي:", opts:["ضعفين", "أربعة أمثال", "النصف", "ربعاً"], correct:2},
+  {topic:"المسائل", q:"جسم كتلته 2 kg يتحرك بسرعة 3 m/s في دائرة نصف قطرها 1.5 m، القوة المركزية:", opts:["3 N", "6 N", "9 N", "12 N"], correct:3},
+  {topic:"السرعة الزاوية", q:"العلاقة بين السرعة الخطية v والسرعة الزاوية ω:", opts:["v = ω / r", "v = ω r", "v = ω r²", "v = r / ω"], correct:1},
+  {topic:"السرعة الزاوية", q:"القوة المركزية بدلالة السرعة الزاوية:", opts:["m ω r", "m ω² r", "m ω / r", "m ω² / r"], correct:1},
+  {topic:"السرعة الزاوية", q:"جسم كتلته 0.5 kg يدور في دائرة نصف قطرها 2 m بسرعة زاوية 3 rad/s، القوة المركزية:", opts:["3 N", "6 N", "9 N", "18 N"], correct:2},
+  {topic:"السرعة الزاوية", q:"جسم يدور بسرعة زاوية 5 rad/s في دائرة نصف قطرها 0.4 m، تسارعه المركزي:", opts:["2 m/s²", "4 m/s²", "10 m/s²", "20 m/s²"], correct:2},
+  {topic:"السرعة الزاوية", q:"جسم يدور بتردد 2 Hz، سرعته الزاوية:", opts:["π rad/s", "2π rad/s", "4π rad/s", "8π rad/s"], correct:2}
+];
+
+let currentStudent = null;
+let quizTimerInterval = null;
+let quizEndTime = null;
+let quizSubmitted = false;
+
+function startQuiz(){
+  const name = document.getElementById('studentName').value.trim();
+  const email = document.getElementById('studentEmail').value.trim();
+  const errEl = document.getElementById('gateError');
+  const nameParts = name.split(/\s+/).filter(Boolean);
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if(nameParts.length < 3){ errEl.textContent = "الرجاء إدخال الاسم الثلاثي كاملاً."; return; }
+  if(!emailOk){ errEl.textContent = "الرجاء إدخال بريد إلكتروني صحيح."; return; }
+  errEl.textContent = "";
+  currentStudent = {name, email, startTime: Date.now()};
+  document.getElementById('quizGateCard').style.display='none';
+  document.getElementById('quizRunningCard').style.display='block';
+  renderQuizForm();
+  const durationMs = 60*60*1000;
+  quizEndTime = currentStudent.startTime + durationMs;
+  quizSubmitted = false;
+  quizTimerInterval = setInterval(updateTimer, 1000);
+  updateTimer();
+}
+
+function renderQuizForm(){
+  const form = document.getElementById('quizForm');
+  form.innerHTML='';
+  quizQuestions.forEach((q,i)=>{
+    const div = document.createElement('div');
+    div.className='quiz-q';
+    let optsHtml = q.opts.map((o,j)=>`
+      <label><input type="radio" name="q${i}" value="${j}"> ${o}</label>
+    `).join('');
+    div.innerHTML = `<div class="qtext">${i+1}. ${q.q}</div>${optsHtml}`;
+    form.appendChild(div);
+  });
+}
+
+function updateTimer(){
+  const remaining = quizEndTime - Date.now();
+  const disp = document.getElementById('timerDisplay');
+  if(remaining <= 0){
+    disp.textContent = "00:00";
+    clearInterval(quizTimerInterval);
+    if(!quizSubmitted) submitQuiz(true);
+    return;
+  }
+  const mins = Math.floor(remaining/60000);
+  const secs = Math.floor((remaining%60000)/1000);
+  disp.textContent = String(mins).padStart(2,'0')+":"+String(secs).padStart(2,'0');
+}
+
+async function submitQuiz(autoSubmitted){
+  if(quizSubmitted) return;
+  quizSubmitted = true;
+  clearInterval(quizTimerInterval);
+  const endTime = Date.now();
+  let score = 0;
+  const topicStats = {};
+  const answers = [];
+  quizQuestions.forEach((q,i)=>{
+    const sel = document.querySelector(`input[name="q${i}"]:checked`);
+    const chosen = sel ? parseInt(sel.value) : -1;
+    const correct = chosen === q.correct;
+    if(correct) score++;
+    answers.push({question:q.q, chosen, correct});
+    if(!topicStats[q.topic]) topicStats[q.topic] = {correct:0,total:0};
+    topicStats[q.topic].total++;
+    if(correct) topicStats[q.topic].correct++;
+  });
+
+  const strengths = [];
+  const weaknesses = [];
+  Object.keys(topicStats).forEach(t=>{
+    const st = topicStats[t];
+    const pct = st.correct/st.total;
+    if(pct >= 0.7) strengths.push(t+` (${st.correct}/${st.total})`);
+    else weaknesses.push(t+` (${st.correct}/${st.total})`);
+  });
+
+  const record = {
+    name: currentStudent.name,
+    email: currentStudent.email,
+    score: score,
+    total: quizQuestions.length,
+    correctCount: score,
+    wrongCount: quizQuestions.length - score,
+    startTime: new Date(currentStudent.startTime).toLocaleString('ar-EG'),
+    endTime: new Date(endTime).toLocaleString('ar-EG'),
+    autoSubmitted: !!autoSubmitted,
+    strengths: strengths.join(' | ') || 'لا يوجد',
+    weaknesses: weaknesses.join(' | ') || 'لا يوجد',
+    answers
+  };
+
+  await storeSet('quiz_results:'+currentStudent.email, JSON.stringify(record));
+
+  document.getElementById('quizRunningCard').style.display='none';
+  document.getElementById('quizResultCard').style.display='block';
+  document.getElementById('scoreDisplay').textContent = score+"/"+quizQuestions.length;
+  document.getElementById('resultStudentInfo').innerHTML = `الاسم: <b>${currentStudent.name}</b> — البريد: <b dir="ltr">${currentStudent.email}</b>`;
+  document.getElementById('strengthBox').innerHTML = `<b>✅ نقاط القوة:</b> ${record.strengths}`;
+  document.getElementById('weakBox').innerHTML = `<b>⚠️ نقاط الضعف:</b> ${record.weaknesses}`;
+}
+
+/* ---------------- Teacher dashboard ---------------- */
+const TEACHER_PASSCODE = "ALNOOR2025";
+function checkTeacherPass(){
+  const val = document.getElementById('teacherPass').value;
+  if(val === TEACHER_PASSCODE){
+    document.getElementById('teacherGateCard').style.display='none';
+    document.getElementById('teacherPanel').style.display='block';
+    loadTeacherData();
+  }else{
+    document.getElementById('teacherGateError').textContent = "رمز الدخول غير صحيح.";
+  }
+}
+
+let lastTeacherRecords = [];
+async function loadTeacherData(){
+  const listRes = await storeList('quiz_results:');
+  const keys = (listRes && listRes.keys) ? listRes.keys : [];
+  const records = [];
+  for(const k of keys){
+    const res = await storeGet(k);
+    if(res && res.value){
+      try{ records.push(JSON.parse(res.value)); }catch(e){}
+    }
+  }
+  lastTeacherRecords = records;
+  renderDashboard(records);
+}
+
+function renderDashboard(records){
+  const body = document.getElementById('dashBody');
+  body.innerHTML='';
+  let sum=0;
+  records.forEach(r=>{
+    sum += r.score;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${r.name}</td><td dir="ltr">${r.email}</td><td>${r.score}/${r.total}</td>
+      <td>${r.correctCount}</td><td>${r.wrongCount}</td>
+      <td>${r.startTime}</td><td>${r.endTime}</td>
+      <td>${r.strengths}</td><td>${r.weaknesses}</td>`;
+    body.appendChild(tr);
+  });
+  const avg = records.length ? (sum/records.length).toFixed(2) : 0;
+  document.getElementById('statCards').innerHTML = `
+    <div class="stat-card"><div class="num">${records.length}</div><div class="lbl">عدد الطلاب</div></div>
+    <div class="stat-card"><div class="num">${avg}</div><div class="lbl">متوسط الدرجات (من 15)</div></div>
+  `;
+}
+
+async function exportExcel(){
+  if(!lastTeacherRecords.length){ alert('لا توجد بيانات لتصديرها بعد.'); return; }
+  const data = lastTeacherRecords.map(r=>({
+    "الاسم": r.name,
+    "البريد الإلكتروني": r.email,
+    "الدرجة": r.score+"/"+r.total,
+    "عدد الإجابات الصحيحة": r.correctCount,
+    "عدد الإجابات الخاطئة": r.wrongCount,
+    "وقت بداية الاختبار": r.startTime,
+    "وقت نهاية الاختبار": r.endTime,
+    "نقاط القوة": r.strengths,
+    "نقاط الضعف": r.weaknesses,
+    "تسليم تلقائي (انتهاء الوقت)": r.autoSubmitted ? "نعم" : "لا"
+  }));
+  const ws = XLSX.utils.json_to_sheet(data);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "نتائج الطلاب");
+  try{
+    const arr = XLSX.write(wb,{bookType:'xlsx',type:'array'});
+    const dl = await claude.use('downloads');
+    if(dl){ await dl.save({filename:'centripetal-results.xlsx', data:new Uint8Array(arr)}); return; }
+  }catch(e){ if(e && e.code==='declined') return; }
+  try{ XLSX.writeFile(wb,'centripetal-results.xlsx'); }catch(e){ alert('تعذر التصدير في هذا العرض.'); }
+}
+</script>
+</body>
+</html>
